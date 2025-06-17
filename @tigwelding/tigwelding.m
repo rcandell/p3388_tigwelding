@@ -6,7 +6,7 @@ classdef tigwelding < handle
 
         % meta data spreadsheet
         meta_data_tbl = [];
-        meta_row_index = 0;
+        meta_row_index = [];
 
         % input file information
         path_to_cdata = '';
@@ -39,6 +39,11 @@ classdef tigwelding < handle
     end
 
     properties (Constant)
+        
+        % file extension
+        fext = '.float32';
+        measdir = 'data';
+
         C = 299792458;  % speed of light m/s
         Fc = 2450e6;    % Hz
         FreqLimit = 50e6; % Hz
@@ -98,14 +103,21 @@ classdef tigwelding < handle
     end
 
     methods
-        function obj = tigwelding(h_meta_tbl, meta_row_index, path_to_cdata, path_to_plots)
-            obj.meta_data_tbl = h_meta_tbl;
-            obj.meta_row_index = meta_row_index;
-            obj.path_to_cdata = path_to_cdata;
+        function obj = tigwelding(h_meta_tbl, path_to_plots)
+            obj.meta_data_tbl = h_meta_tbl;          
             obj.path_to_plots = path_to_plots;
         end
 
-        function obj = loadCData(obj)
+        function obj = loadCData(obj, meta_row_index)
+
+            obj.meta_row_index = meta_row_index;
+
+            % list files within specified directory
+            dpath = char(table2array(obj.meta_data_tbl(meta_row_index, 'Directory')));
+            flist = dir([tigwelding.measdir '/' dpath '/*' tigwelding.fext]);
+            obj.path_to_cdata = [flist(1).folder '/' flist(1).name];    
+
+            % open the file
             fid = fopen(obj.path_to_cdata,"r");
             x = fread(fid, 'single');
             x = complex(x(1:2:end-1),x(2:2:end));

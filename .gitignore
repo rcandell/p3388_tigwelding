@@ -6,4 +6,8 @@ desktop.ini
 *.pdf
 *_pub.pdf
 data
-
+figs/*
+*.png
+*.svg
+*.jpg
+*.csv

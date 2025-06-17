@@ -10,8 +10,6 @@ fclose all;
 clc;
 
 meta_path = './MeasurementParameters.xlsx';
-measdir = 'data';
-fext = '.float32';
 
 % output files
 path_to_plots = 'figs';
@@ -27,14 +25,13 @@ fprintf(            'Weld Type\t Base Metal\t Gas\t Distance (m)\t Fc (GHz)\t HF
 meta_data_tbl = tigwelding.importMeta(meta_path);
 
 % what to enable
-PSTATS_ON = false;
+BASELINE_ON = true;
+PSTATS_ON = true;
 PMAP_ON = true;
-PSPEC_ON = false;
-PUTIL_ON = false;
-PREGIONS_ON = false;
-DBSCAN_ON = false;
-SAVEWS_ON = false;
-TSPLOT_ON = false;
+PREGIONS_ON = true;
+DBSCAN_ON = true;
+SAVEWS_ON = true;
+TSPLOT_ON = true;
 
 % scaling factors
 tscale = 1;
@@ -44,29 +41,28 @@ fscale = 1e6;
 for jj = 1:height(meta_data_tbl)
 
     status = char(table2array(meta_data_tbl(jj, 'HF')));
-    if strcmp(status, 'OFF')
-        continue
+    weldtype = char(table2array(meta_data_tbl(jj, 'WeldType')));
+    if BASELINE_ON
+        if ~strcmp(weldtype, 'BASELINE')
+            continue
+        end        
+    else
+        if ~strcmp(status, 'ON')
+            continue
+        end
     end
 
     % get title info
-    weldtype = char(table2array(meta_data_tbl(jj, 'WeldType')));
     setnum = mat2str(table2array(meta_data_tbl(jj, 'Number')));
     runnum = mat2str(table2array(meta_data_tbl(jj, 'Run')));
     centerfreq = mat2str(table2array(meta_data_tbl(jj, 'Fc')));
     titlestr = [weldtype ' Set ' setnum ' Run ' runnum ' Fc ' centerfreq];
 
-    % list files within specified directory
-    dpath = char(table2array(meta_data_tbl(jj, 'Directory')));
-    flist = dir([measdir '/' dpath '/*' fext]);
-    if isempty(flist)
-        continue
-    end
-    fpath = [flist(1).folder '/' flist(1).name];
-
     % construct an analysis object
-    A = tigwelding(meta_data_tbl, jj, fpath, path_to_plots);
-    A.loadCData();
-    meas_name = table2array(A.meta_data_tbl(A.meta_row_index, 'Directory'));
+    A = tigwelding(meta_data_tbl, path_to_plots);
+
+    A.loadCData(jj);
+    meas_name = table2array(A.meta_data_tbl(jj, 'Directory'));
     %A.resample(8,25); % resample to 100 Msps
 
     pThreshold = NaN;
@@ -127,12 +123,6 @@ for jj = 1:height(meta_data_tbl)
         % [~, pngPathFull] = tigwelding.savePlotTo(gcf, path_to_plots, meas_name, 'waterfall');         
         % % R.addSubSubSection('Power Spectrum Vs. Time');
         % % R.addPngFigure(latexreport.FIG_FLOAT, pngPathFull, 'Power intensity in dBm versus time');        
-    end
-
-    if PSPEC_ON 
-    end
-
-    if PUTIL_ON 
     end
     
     if PREGIONS_ON                      
