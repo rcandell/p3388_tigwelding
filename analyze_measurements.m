@@ -25,7 +25,7 @@ fprintf(            'Weld Type\t Base Metal\t Gas\t Distance (m)\t Fc (GHz)\t HF
 meta_data_tbl = tigwelding.importMeta(meta_path);
 
 % what to enable
-BASELINE_ON = true;
+BASELINE_ON = false;
 PSTATS_ON = true;
 PMAP_ON = true;
 PREGIONS_ON = true;
@@ -159,7 +159,9 @@ for jj = 1:height(meta_data_tbl)
         fidLgRegions = fopen(regions_fname,'w');
         fprintf(fidLgRegions, 'Start Time (s), Start Freq (MHz), Duration, Bandwidth (MHz)'); 
         fclose(fidLgRegions);
-        writetable(A.connectedRegionBoxesScaled, regions_fname, 'WriteMode','append')            
+        if ~isempty(A.connectedRegionBoxesScaled)
+            writetable(A.connectedRegionBoxesScaled, regions_fname, 'WriteMode','append')            
+        end
     end
 
     if DBSCAN_ON
@@ -168,13 +170,13 @@ for jj = 1:height(meta_data_tbl)
 
         figure()
         A.computeClustersDBScan(clusterThreshold, 2, 32, fscale);
-        title('DBSCAN Clusters for ' + A.meas_name);    
+        title('DBSCAN Clusters for ' + meas_name);    
         [~, pngPathFull] = tigwelding.savePlotTo(gcf, path_to_plots, meas_name, 'dbscan');  
     end
 
     if SAVEWS_ON 
         % save the workspace
-        sPathToWs = strcat(measdir, '/', dpath, '/workspace.mat');
+        sPathToWs = strcat(A.measdir, '/', A.dpath, '/workspace.mat');
         save(sPathToWs);        
     end    
 

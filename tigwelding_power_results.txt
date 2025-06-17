@@ -1,1 +1,2 @@
 Weld Type	 Base Metal	 Gas	 Distance (m)	 Fc (GHz)	 HF (ON/OFF)	 Current (A)	 Int Pwr Arc (dBm)	 input file name
+TIG	 aluminum plate	 Argon	 3.96	 5.30	 ON	 200.00	 NaN	 2_TIG_ACnopulse_5GHz_IQ_time.iq

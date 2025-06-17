@@ -10,6 +10,7 @@ classdef tigwelding < handle
 
         % input file information
         path_to_cdata = '';
+        dpath;
 
         % output file information
         path_to_plots = '';
@@ -113,8 +114,8 @@ classdef tigwelding < handle
             obj.meta_row_index = meta_row_index;
 
             % list files within specified directory
-            dpath = char(table2array(obj.meta_data_tbl(meta_row_index, 'Directory')));
-            flist = dir([tigwelding.measdir '/' dpath '/*' tigwelding.fext]);
+            obj.dpath = char(table2array(obj.meta_data_tbl(meta_row_index, 'Directory')));
+            flist = dir([tigwelding.measdir '/' obj.dpath '/*' tigwelding.fext]);
             obj.path_to_cdata = [flist(1).folder '/' flist(1).name];    
 
             % open the file
