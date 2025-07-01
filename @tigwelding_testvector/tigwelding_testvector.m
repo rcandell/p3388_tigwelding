@@ -17,6 +17,7 @@ classdef tigwelding_testvector < tigwelding
             6, 1, -55; 6, 2, -62; 
             11, 1, -55; 11, 2, -62             
             ];
+        norm_pwr = false;
     end
     
     methods
@@ -51,8 +52,13 @@ classdef tigwelding_testvector < tigwelding
             end
 
             % normalize the data to unity power
-            p = mean(abs(iq).^2);
-            iq = iq/sqrt(p);
+            if obj.norm_pwr
+                p = mean(abs(iq).^2);
+                iq = iq/sqrt(p);
+            else
+                a = max(abs(iq));
+                iq = iq/a;
+            end
 
         end
     end

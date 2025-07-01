@@ -18,14 +18,14 @@ fidResults = nan;
 
 % write header to power stats file
 fidResults = fopen("tigwelding_power_results.txt",'w');
-fprintf(fidResults, 'Weld Type\t Base Metal\t Gas\t Distance (m)\t Fc (GHz)\t HF (ON/OFF)\t Current (A)\t Int Pwr Arc (dBm)\t input file name\n');
-fprintf(            'Weld Type\t Base Metal\t Gas\t Distance (m)\t Fc (GHz)\t HF (ON/OFF)\t Current (A)\t Int Pwr Arc (dBm)\t input file name\n');
+fprintf(fidResults, 'Weld Type\t Base Metal\t Gas\t Distance (m)\t Fc (GHz)\t HF (ON/OFF)\t Current (A)\t Intf Pwr Arc (dBm)\t input file name\n');
+fprintf(            'Weld Type\t Base Metal\t Gas\t Distance (m)\t Fc (GHz)\t HF (ON/OFF)\t Current (A)\t Intf Pwr Arc (dBm)\t input file name\n');
 
 % open the meta data file
 meta_data_tbl = tigwelding.importMeta(meta_path);
 
 % what to enable
-BASELINE_ON = false;
+BASELINE_ON = false; % when TRUE turns off everything else
 PSTATS_ON = true;
 PMAP_ON = true;
 PREGIONS_ON = true;

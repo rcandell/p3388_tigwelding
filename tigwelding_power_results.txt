@@ -1,2 +1,18 @@
 Weld Type	 Base Metal	 Gas	 Distance (m)	 Fc (GHz)	 HF (ON/OFF)	 Current (A)	 Int Pwr Arc (dBm)	 input file name
+TIG	 aluminum plate	 Argon	 3.96	 0.90	 ON	 150.00	 12.07	 1_TIG_ACnopulse_900_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 0.90	 ON	 150.00	 12.07	 1_TIG_ACnopulse_900_IQ_time_2.iq
+TIG	 aluminum plate	 Argon	 3.96	 2.45	 ON	 150.00	 -6.05	 1_TIG_ACnopulse_24_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 0.90	 ON	 200.00	 -1.49	 2_TIG_ACnopulse_900_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 2.45	 ON	 200.00	 -4.93	 2_TIG_ACnopulse_24GHz_IQ_time.iq
 TIG	 aluminum plate	 Argon	 3.96	 5.30	 ON	 200.00	 NaN	 2_TIG_ACnopulse_5GHz_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 0.90	 ON	 200.00	 -0.45	 3_TIG_ACpulse_900_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 2.45	 ON	 200.00	 -5.17	 3_TIG_ACpulse_24GHz_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 5.30	 ON	 200.00	 NaN	 3_TIG_ACpulse_5GHz_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 0.90	 ON	 200.00	 -0.45	 4_TIG_ACpulse_900_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 2.45	 ON	 200.00	 -3.13	 4_TIG_ACpulse_24GHz_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 0.90	 ON	 100.00	 -0.41	 5_TIG_ACnopulse_900_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 2.45	 ON	 100.00	 -5.93	 5_TIG_ACnopulse_24GHz_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 0.90	 ON	 100.00	 -0.44	 6_TIG_DCnopulse_900_IQ_time.iq
+TIG	 aluminum plate	 Argon	 3.96	 2.45	 ON	 100.00	 -5.72	 6_TIG_DCnopulse_24GHz_IQ_time.iq
+TIG	 steel plate	 Argon	 3.96	 0.90	 ON	 100.00	 -0.15	 11_TIG_DCnopulse_900_IQ_time.iq
+TIG	 steel plate	 Argon	 3.96	 2.45	 ON	 100.00	 -6.25	 11_TIG_DCnopulse_24GHz_IQ_time.iq

@@ -15,11 +15,11 @@ measdir = 'data';
 % PSTATS output table
 pstats_tbl_colnames = { ...
     'TVID','Num', 'Run', 'Fc_GHz', 'PowerIgnition', ...
-    'HFOn', 'PulserOn', 'CurrentAmps', 'Fs', 'TVFilename' };
-catalog_tbl = table('Size', [0, 10], ...
+    'HFOn', 'PulserOn', 'CurrentAmps', 'Fs', 'TVFilename', 'OriginalFilename' };
+catalog_tbl = table('Size', [0, 11], ...
     'VariableNames', pstats_tbl_colnames, ...
     'VariableTypes', { 'double', 'double', 'double', 'double', 'string', ...
-                       'string', 'string', 'double', 'double', 'string'});
+                       'string', 'string', 'double', 'double', 'string', 'string'});
 
 % output files
 testvec_path = 'testvec3388';
@@ -35,6 +35,7 @@ for jj = 1:height(meta_data_tbl)
     run_ = meta_data_tbl{jj,"Run"};
     Fc = table2array(meta_data_tbl(jj, 'Fc'));
     HF = char(table2array(meta_data_tbl(jj, 'HF')));
+    OriginalFilename = char(table2array(meta_data_tbl(jj, 'FileName')));
     if ~strcmp(HF, 'ON')
         continue;
     end
@@ -58,7 +59,7 @@ for jj = 1:height(meta_data_tbl)
     piopt = meta_data_tbl{jj,"PowerAndIgnitionOption"};
     pulseron = meta_data_tbl{jj,"Pulser"};
     current_amps = meta_data_tbl{jj,"Current"};
-    catalog = { ii, num_, run_, Fc, piopt, HF, pulseron, current_amps, TV.SampleRate, tv_filename };
+    catalog = { ii, num_, run_, Fc, piopt, HF, pulseron, current_amps, TV.SampleRate, tv_filename, OriginalFilename };
     catalog_tbl(height(catalog_tbl)+1,:) = catalog;  
 
     t = 1000*(0:length(iq)-1)/TV.SampleRate;
