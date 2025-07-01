@@ -1,4 +1,4 @@
-% GENERATE_TESTVECTORS_IEEE3388 top level script to make test vectors for 3388
+% GENERATE_TESTVECTORS_IEEE3388 top level script to make test vectors for IEEE 3388
 %
 % Author: Rick Candell
 % Organization: National Institute of Standards and Technology
